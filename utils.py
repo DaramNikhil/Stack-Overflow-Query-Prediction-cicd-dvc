@@ -36,7 +36,7 @@ def read_yaml(config_path):
         raise e
 
 
-def get_df(data_file, sep="\t"):
+def get_df(data_file, sep="\t", shuffle=True):
     df = pd.read_csv(
         data_file,
         encoding="utf-8",
@@ -44,7 +44,9 @@ def get_df(data_file, sep="\t"):
         header=None,
         names=["Id", "Label", "Text"],
     )
-    return df
+    if shuffle:
+        df = df.sample(frac=1).reset_index(drop=True)
+        return df
 
 
 def save_metrics(df, metrics, metrics_save_path):

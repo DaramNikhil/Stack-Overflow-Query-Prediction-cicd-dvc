@@ -31,3 +31,4 @@ def prepare_data(config_path):
                     )
     except Exception as e:
         raise e
+                

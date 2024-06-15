@@ -45,12 +45,12 @@ def prepare_data2(data_yaml):
         pipeline.fit(train_words)
         joblib.dump(pipeline, pipeline_save_data_path)  # Pipeline model saved path
         train_metrics = pipeline.transform(train_words)
-        save_metrics(train_df, train_metrics, feature_train_data_path)
+        save_metrics(df=train_df, metrics=train_metrics, metrics_save_path=feature_train_data_path)
 
         test_df = get_df(data_file=test_data_path)
         test_words = np.array(test_df["Text"].str.lower().values.astype("U"))
         test_metrics = pipeline.transform(test_words)
-        save_metrics(test_df, test_metrics, feature_test_data_path)
+        save_metrics(df=test_df, metrics=test_metrics, metrics_save_path=feature_test_data_path)
 
     except Exception as e:
         raise e

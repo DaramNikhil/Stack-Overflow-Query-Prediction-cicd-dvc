@@ -1,16 +1,21 @@
 artifacts:
-  ARTIFACTS_DIR : artifacts
-  PREPARE_DATA: prepared
-  MODEL_FEATURES: model_features
-  FEATURE_TRAIN_DATA: train.pkl
-  FEATURE_TEST_DATA: test.pkl
-  PIPELINE_DATA: pipeline.pkl
-  TRAIN_DATA: train.tsv
-  TEST_DATA: test.tsv
+    ARTIFACTS_DIR: artifacts
+    PREPARE_DATA: prepared
+    MODEL_FEATURES: model_features
+    FEATURE_TRAIN_DATA: train.pkl
+    FEATURE_TEST_DATA: test.pkl
+    PIPELINE_DATA: pipeline.pkl
+    TRAIN_DATA: train.tsv
+    TEST_DATA: test.tsv
+    MODEL_DIR: models
+    MODEL_FILE: model.pkl
+    PRECISION_JSON: PRECISION.json
+    ROC_JSON: ROC.json
+    MODEL_SCORE: model_scores.json
 
-local_data_file_path: 'data.xml'
-split_ratio : 0.3
+local_data_file_path: data.xml
+split_ratio: 0.3
 
 featurization:
-  max_features: 2500
-  norms: 2
+    max_features: 2500
+    norms: 2
