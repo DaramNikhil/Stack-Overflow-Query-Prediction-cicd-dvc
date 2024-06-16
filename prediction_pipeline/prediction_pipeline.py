@@ -13,7 +13,7 @@ def single_query_prediction(model_path, transformer_path, query):
         if y_pred == [1.0]:
             print("This query is related to Python")
         else:
-            print("This query is not related to Python")
+            print("non related python query")
 
     except Exception as e:
         raise e
@@ -30,7 +30,7 @@ def prediction_for_batch(model_path, transformer_path, batch):
         y_pred_arr = np.array(model.predict(metrix_test_data))
         test_data['prediction_data'] = y_pred_arr
         test_data['prediction_data'] = test_data["prediction_data"].replace({
-                0.0:"Query is not related to python",
+                0.0:"non python query",
                 1.0:"Query is related to python"
                 
         })
