@@ -31,7 +31,7 @@ def prediction_for_batch(model_path, transformer_path, batch):
         test_data['prediction_data'] = y_pred_arr
         test_data['prediction_data'] = test_data["prediction_data"].replace({
                 0.0:"non python query",
-                1.0:"Query is related to python"
+                1.0:"Python Query"
                 
         })
         test_data.to_csv("prediction.csv", index=False)

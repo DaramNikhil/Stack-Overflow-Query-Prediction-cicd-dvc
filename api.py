@@ -1,25 +1,19 @@
 from fastapi import FastAPI, Response
 from fastapi.responses import HTMLResponse
 import uvicorn
-import sys, os
-sys.path.append(os.getcwd())
-from utils import *
-from prediction_pipeline import prediction_pipeline
 import pandas as pd
-import numpy as np
-
+import os
+from prediction_pipeline import prediction_pipeline
 
 app = FastAPI()
 
-
 @app.get("/")
 def predict_page():
-    message = "<h1> Wellcome to the prediction api</h1>"
-    message2 = "<h2> click the below link to get predictions</h2>"
-    link = "<a href='http://127.0.0.1'> Predict for inferencing batch data</a>"
-    msg = message+message2+link
+    message = "<h1>Welcome to the prediction API</h1>"
+    message2 = "<h2>Click the link below to get predictions</h2>"
+    link = "<a href='/predict'> Predict for inferencing batch data</a>"
+    msg = message + message2 + link
     return HTMLResponse(content=msg)
-
 
 @app.get('/predict')
 def prediction_batch_data():
@@ -29,8 +23,10 @@ def prediction_batch_data():
     prediction_pipeline.prediction_for_batch(load_model, transformer_model, pred_data_file)
     prediction_data = "prediction.csv"
     df = pd.read_csv(prediction_data)
-    return Response(content=df.to_csv(index=False), media_type="text/csv")
-
+    df_to_html = df.to_html(index=False)
+    header = "<h1>Stackoverflow inferencing batch data</h1>"
+    table_html = header + df_to_html
+    return HTMLResponse(content=table_html)
 
 if __name__ == '__main__':
-    uvicorn.run(host="127.0.0.1", app=app)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
